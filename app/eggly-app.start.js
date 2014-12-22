@@ -27,6 +27,8 @@ angular.module('Eggly',[
 
     function setCurrentCategory(category){
         $scope.currentCategory=category;
+        cancelCreating();
+        cancelEditing();
     }
 
     function isCurrentCategory(category){
@@ -57,8 +59,17 @@ angular.module('Eggly',[
       $scope.isEditing = false;
     }
 
+    function shouldShowCreating(){
+        return $scope.currentCategory && !$scope.isEditing;
+    }
+    function shouldShowEditing(){
+        return $scope.isEditing && !$scope.isCreating;
+    }
+
     $scope.startCreating = startCreating;
     $scope.cancelCreating = cancelCreating;
     $scope.startEditing = startEditing;
     $scope.cancelEditing = cancelEditing;
+    $scope.shouldShowCreating = shouldShowCreating;
+    $scope.shouldShowEditing = shouldShowEditing;
 });
